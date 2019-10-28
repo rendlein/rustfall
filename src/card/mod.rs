@@ -32,6 +32,7 @@ pub struct Card {
     oracle_text: Option<String>,
     power: Option<String>,
     toughness: Option<String>,
+    loyalty: Option<String>,
     colors: Option<Vec<String>>,
     color_indicator: Option<Vec<String>>,
     color_identity: Vec<String>,
@@ -96,5 +97,70 @@ pub struct CardFace {
 }
 
 impl CardList {
+    pub fn print_list(&self) {
+        let cards = self.data.iter();
 
+        for item in cards {
+            item.print();
+        }
+    }
+}
+
+impl Card {
+    pub fn print(&self) {
+        match &self.card_faces {
+            Some(x) => {
+                for i in x {
+                    i.print();
+                }
+            }
+            _ => ()
+        }
+        self._print();
+    }
+
+    fn _print(&self) {
+        println!("{}", self.name);
+
+        match &self.mana_cost {
+            Some(x) => { println!("{}", x) }
+            _ => ()
+        };
+
+        println!("{}", self.type_line);
+
+        match &self.oracle_text {
+            Some(x) => { println!("{}", x) }
+            _ => ()
+        };
+
+        match &self.power {
+            Some(pow) => { print!("{}/", pow) }
+            _ => ()
+        };
+
+        match &self.toughness {
+            Some(tough) => { println!("{}", tough) }
+            _ => ()
+        };
+
+        match &self.loyalty {
+            Some(loyal) => { println!("{}", loyal) }
+            _ => ()
+        };
+    }
+}
+
+impl CardFace {
+    pub fn print(&self) {
+        println!("{}", self.name);
+        match &self.mana_cost {
+            Some(x) => {
+                if *x != "".to_string() {
+                    println!("{}", x);
+                }
+            }
+            _ => ()
+        };
+    }
 }
