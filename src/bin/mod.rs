@@ -5,7 +5,7 @@ use clap::{Arg, App};
 
 fn main () {
     let matches = App::new("rustfall")
-        .version("0.1.0")
+        .version("1.0.0")
         .author("Jacob Boone")
         .about("Search MTG cards using the Scryfall api")
         .arg(Arg::with_name("TEXT")
