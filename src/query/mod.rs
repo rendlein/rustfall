@@ -1,4 +1,3 @@
-#![allow(dead_code)]
 use reqwest;
 use reqwest::Response;
 use std::{thread, time};
