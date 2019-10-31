@@ -1,5 +1,6 @@
 use serde::Deserialize;
 use std::collections::HashMap;
+use std::{thread, time};
 use crate::query::Query;
 
 #[derive(Deserialize, Debug)]
@@ -115,18 +116,23 @@ impl CardList {
         (self.total_cards / 175) + 1
     }
 
+    #[allow(unused_assignments)]
     pub fn process(&mut self) {
         if self.has_more {
             let mut list: Option<CardList> = None;
             let mut next = self.next_page.as_ref().unwrap().clone();
             let mut i: u32 = 2;
-            while i <= self.pages() {
+            let pages = self.pages();
+            while i <= pages {
+                if pages > 5 {
+                    let delay = time::Duration::from_millis(50);
+                    thread::sleep(delay);
+                }
                 let q = Query::new(next.clone());
                 list = q.run();
 
                 match list {
                     Some(item) => {
-                        println!("{:?}" ,item);
                         for x in item.data {
                             self.data.push(x);
 

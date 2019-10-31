@@ -1,6 +1,4 @@
 use reqwest;
-use reqwest::Response;
-use std::{thread, time};
 use crate::card::CardList;
 
 #[derive(Debug)]
