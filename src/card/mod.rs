@@ -121,30 +121,30 @@ impl CardList {
         if self.has_more {
             let mut list: Option<CardList> = None;
             let mut next = self.next_page.as_ref().unwrap().clone();
-            let mut i: u32 = 2;
+            let mut count: u32 = 2;
             let pages = self.pages();
-            while i <= pages {
+            while count <= pages {
                 if pages > 5 {
                     let delay = time::Duration::from_millis(50);
                     thread::sleep(delay);
                 }
-                let q = Query::new(next.clone());
-                list = q.run();
+                let query = Query::new(next.clone());
+                list = query.run();
 
                 match list {
                     Some(item) => {
-                        for x in item.data {
-                            self.data.push(x);
+                        for card in item.data {
+                            self.data.push(card);
 
                             if item.has_more {
                                 next = item.next_page.as_ref().unwrap().clone();
                             }
                         }
                     }
-                    _ => ()
+                    _ => {}
                 }
 
-                i += 1;
+                count += 1;
             }
         }
     }
@@ -153,9 +153,9 @@ impl CardList {
 impl Card {
     pub fn print(&self) {
         match &self.card_faces {
-            Some(x) => {
-                for i in x {
-                    i.print();
+            Some(faces) => {
+                for card in faces {
+                    card.print();
                     println!();
                 }
             }
@@ -170,9 +170,9 @@ impl Card {
         println!("{}", self.name);
 
         match &self.mana_cost {
-            Some(x) => {
-                if x != "" {
-                    println!("{}", x)
+            Some(cost) => {
+                if cost != "" {
+                    println!("{}", cost)
                 }
             }
             _ => ()
@@ -181,27 +181,27 @@ impl Card {
         println!("{}", self.type_line);
 
         match &self.oracle_text {
-            Some(x) => {
-                if x != "" {
-                    println!("{}", x)
+            Some(oracle) => {
+                if oracle != "" {
+                    println!("{}", oracle)
                 }
             }
-            _ => ()
+            _ => {}
         };
 
         match &self.power {
             Some(pow) => { print!("{}/", pow) }
-            _ => ()
+            _ => {}
         };
 
         match &self.toughness {
             Some(tough) => { println!("{}", tough) }
-            _ => ()
+            _ => {}
         };
 
         match &self.loyalty {
             Some(loyal) => { println!("{}", loyal) }
-            _ => ()
+            _ => {}
         };
     }
 }
@@ -210,9 +210,9 @@ impl CardFace {
     pub fn print(&self) {
         println!("{}", self.name);
         match &self.mana_cost {
-            Some(x) => {
-                if *x != "".to_string() {
-                    println!("{}", x);
+            Some(cost) => {
+                if *cost != "".to_string() {
+                    println!("{}", cost);
                 }
             }
             None => {}
@@ -221,24 +221,24 @@ impl CardFace {
         println!("{}", self.type_line);
 
         match &self.oracle_text {
-            Some(x) => {
-                println!("{}", x);
+            Some(oracle) => {
+                println!("{}", oracle);
             }
             None => {}
         };
 
         match &self.power {
-            Some(x) => { print!("{}", x) },
+            Some(power) => { print!("{}", power) },
             None => {},
         };
 
         match &self.toughness {
-            Some(x) => { println!("/{}", x) },
+            Some(tough) => { println!("/{}", tough) },
             None => {},
         };
 
         match &self.loyalty {
-            Some(x) => { println!("Loyalty: {}", x) },
+            Some(loyal) => { println!("Loyalty: {}", loyal) },
             None => {},
         };
 
