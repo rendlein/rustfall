@@ -16,10 +16,12 @@ fn main () {
     if matches.is_present("TEXT") {
         let mut string: String = "".to_string();
         let text = matches.values_of("TEXT").unwrap();
+
         for value in text {
             string.push_str(value);
             string.push_str(" ");
         }
+
         let query = Query::new(string);
         let result = query.run();
 
@@ -28,8 +30,7 @@ fn main () {
                 list.process();
                 list.print_list()
             }
-            _ => ()
+            _ => {}
         };
-
     }
 }
