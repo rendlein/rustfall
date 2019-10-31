@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 serde = { version = "1.0.101", features = ["derive"] }
 reqwest = "*"
+clap = "2.33.0"

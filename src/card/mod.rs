@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 use serde::Deserialize;
 use std::collections::HashMap;
+use crate::query::Query;
 
 #[derive(Deserialize, Debug)]
 pub struct CardList {
@@ -8,7 +9,7 @@ pub struct CardList {
     total_cards: u32,
     has_more: bool,
     next_page: Option<String>,
-    data: Vec<Card>
+    pub data: Vec<Card>
 }
 
 #[derive(Deserialize, Debug)]
@@ -104,6 +105,44 @@ impl CardList {
             item.print();
         }
     }
+
+    pub fn has_more(&self) -> bool {
+        self.has_more
+    }
+
+    /// Return number of pages for the query.
+    /// Scryfall shows 175 cards per page.
+    pub fn pages(&self) -> u32 {
+        (self.total_cards / 175) + 1
+    }
+
+    pub fn process(&mut self) {
+        if self.has_more {
+            let mut list: Option<CardList> = None;
+            let mut next = self.next_page.as_ref().unwrap().clone();
+            let mut i: u32 = 2;
+            while i <= self.pages() {
+                let q = Query::new(next.clone());
+                list = q.run();
+
+                match list {
+                    Some(item) => {
+                        println!("{:?}" ,item);
+                        for x in item.data {
+                            self.data.push(x);
+
+                            if item.has_more {
+                                next = item.next_page.as_ref().unwrap().clone();
+                            }
+                        }
+                    }
+                    _ => ()
+                }
+
+                i += 1;
+            }
+        }
+    }
 }
 
 impl Card {
@@ -112,25 +151,36 @@ impl Card {
             Some(x) => {
                 for i in x {
                     i.print();
+                    println!();
                 }
             }
-            _ => ()
+            _ => {
+                self._print();
+                println!();
+            }
         }
-        self._print();
     }
 
     fn _print(&self) {
         println!("{}", self.name);
 
         match &self.mana_cost {
-            Some(x) => { println!("{}", x) }
+            Some(x) => {
+                if x != "" {
+                    println!("{}", x)
+                }
+            }
             _ => ()
         };
 
         println!("{}", self.type_line);
 
         match &self.oracle_text {
-            Some(x) => { println!("{}", x) }
+            Some(x) => {
+                if x != "" {
+                    println!("{}", x)
+                }
+            }
             _ => ()
         };
 
@@ -160,7 +210,32 @@ impl CardFace {
                     println!("{}", x);
                 }
             }
-            _ => ()
+            None => {}
+        }
+
+        println!("{}", self.type_line);
+
+        match &self.oracle_text {
+            Some(x) => {
+                println!("{}", x);
+            }
+            None => {}
         };
+
+        match &self.power {
+            Some(x) => { print!("{}", x) },
+            None => {},
+        };
+
+        match &self.toughness {
+            Some(x) => { println!("/{}", x) },
+            None => {},
+        };
+
+        match &self.loyalty {
+            Some(x) => { println!("Loyalty: {}", x) },
+            None => {},
+        };
+
     }
 }
