@@ -16,17 +16,17 @@ fn main () {
     if matches.is_present("TEXT") {
         let mut string: String = "".to_string();
         let text = matches.values_of("TEXT").unwrap();
-        for i in text {
-            string.push_str(i);
+        for value in text {
+            string.push_str(value);
             string.push_str(" ");
         }
         let query = Query::new(string);
         let result = query.run();
 
         match result {
-            Some(mut x) => {
-                x.process();
-                x.print_list()
+            Some(mut list) => {
+                list.process();
+                list.print_list()
             }
             _ => ()
         };
