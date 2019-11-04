@@ -1,9 +1,10 @@
 extern crate rustfall;
 extern crate clap;
+
 use rustfall::query::Query;
 use clap::{Arg, App};
 
-fn main () {
+fn main() {
     let matches = App::new("rustfall")
         .version("1.0.0")
         .author("Jacob Boone")

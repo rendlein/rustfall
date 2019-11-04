@@ -143,7 +143,6 @@ impl CardList {
                     }
                     _ => {}
                 }
-
                 count += 1;
             }
         }
@@ -168,7 +167,6 @@ impl Card {
 
     fn _print(&self) {
         println!("{}", self.name);
-
         match &self.mana_cost {
             Some(cost) => {
                 if cost != "" {
@@ -177,9 +175,7 @@ impl Card {
             }
             _ => ()
         };
-
         println!("{}", self.type_line);
-
         match &self.oracle_text {
             Some(oracle) => {
                 if oracle != "" {
@@ -188,17 +184,14 @@ impl Card {
             }
             _ => {}
         };
-
         match &self.power {
             Some(pow) => { print!("{}/", pow) }
             _ => {}
         };
-
         match &self.toughness {
             Some(tough) => { println!("{}", tough) }
             _ => {}
         };
-
         match &self.loyalty {
             Some(loyal) => { println!("{}", loyal) }
             _ => {}
