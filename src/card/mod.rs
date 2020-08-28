@@ -1,7 +1,7 @@
+use crate::query::Query;
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::{thread, time};
-use crate::query::Query;
 
 #[derive(Deserialize, Debug)]
 pub struct CardList {
@@ -9,7 +9,7 @@ pub struct CardList {
     total_cards: u32,
     has_more: bool,
     next_page: Option<String>,
-    pub data: Vec<Card>
+    pub data: Vec<Card>,
 }
 
 #[derive(Deserialize, Debug)]
@@ -94,7 +94,7 @@ pub struct CardFace {
     printed_name: Option<String>,
     printed_text: Option<String>,
     printed_type_line: Option<String>,
-    watermark: Option<String>
+    watermark: Option<String>,
 }
 
 impl CardList {
@@ -131,17 +131,14 @@ impl CardList {
                 let query = Query::new(next.clone());
                 list = query.run();
 
-                match list {
-                    Some(item) => {
-                        for card in item.data {
-                            self.data.push(card);
+                if let Some(item) = list {
+                    for card in item.data {
+                        self.data.push(card);
 
-                            if item.has_more {
-                                next = item.next_page.as_ref().unwrap().clone();
-                            }
+                        if item.has_more {
+                            next = item.next_page.as_ref().unwrap().clone();
                         }
                     }
-                    _ => {}
                 }
                 count += 1;
             }
@@ -151,51 +148,43 @@ impl CardList {
 
 impl Card {
     pub fn print(&self) {
-        match &self.card_faces {
-            Some(faces) => {
-                for card in faces {
-                    card.print();
-                    println!();
-                }
-            }
-            _ => {
-                self._print();
+        if let Some(faces) = &self.card_faces {
+            for card in faces {
+                card.print();
                 println!();
             }
+        } else {
+            self._print();
+            println!();
         }
     }
 
     fn _print(&self) {
         println!("{}", self.name);
-        match &self.mana_cost {
-            Some(cost) => {
-                if cost != "" {
-                    println!("{}", cost)
-                }
+        if let Some(cost) = &self.mana_cost {
+            if cost != "" {
+                println!("{}", cost)
             }
-            _ => ()
-        };
+        }
+
         println!("{}", self.type_line);
-        match &self.oracle_text {
-            Some(oracle) => {
-                if oracle != "" {
-                    println!("{}", oracle)
-                }
+        if let Some(oracle) = &self.oracle_text {
+            if oracle != "" {
+                println!("{}", oracle)
             }
-            _ => {}
-        };
-        match &self.power {
-            Some(pow) => { print!("{}/", pow) }
-            _ => {}
-        };
-        match &self.toughness {
-            Some(tough) => { println!("{}", tough) }
-            _ => {}
-        };
-        match &self.loyalty {
-            Some(loyal) => { println!("{}", loyal) }
-            _ => {}
-        };
+        }
+
+        if let Some(pow) = &self.power {
+            print!("{}/", pow)
+        }
+
+        if let Some(tough) = &self.toughness {
+            println!("{}", tough)
+        }
+
+        if let Some(loyalty) = &self.loyalty {
+            println!("{}", loyalty)
+        }
     }
 }
 
@@ -204,7 +193,7 @@ impl CardFace {
         println!("{}", self.name);
         match &self.mana_cost {
             Some(cost) => {
-                if *cost != "".to_string() {
+                if !(*cost).is_empty() {
                     println!("{}", cost);
                 }
             }
@@ -221,19 +210,18 @@ impl CardFace {
         };
 
         match &self.power {
-            Some(power) => { print!("{}", power) },
-            None => {},
+            Some(power) => print!("{}", power),
+            None => {}
         };
 
         match &self.toughness {
-            Some(tough) => { println!("/{}", tough) },
-            None => {},
+            Some(tough) => println!("/{}", tough),
+            None => {}
         };
 
         match &self.loyalty {
-            Some(loyal) => { println!("Loyalty: {}", loyal) },
-            None => {},
+            Some(loyal) => println!("Loyalty: {}", loyal),
+            None => {}
         };
-
     }
 }
