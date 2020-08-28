@@ -1,5 +1,6 @@
-use reqwest;
 use crate::card::CardList;
+use std::task::Poll;
+use reqwest::blocking as reqwest;
 
 #[derive(Debug)]
 pub struct Query {
@@ -22,14 +23,18 @@ impl Query {
     pub fn run(self) -> Option<CardList> {
         let mut res: Option<CardList> = None;
         let response = reqwest::get(self.string.as_str());
-        if response.is_ok() {
-            let mut results = response.unwrap();
-            if results.status().is_client_error() || results.status().is_server_error() {
+        match response {
+            Ok(response) => {
+                let mut results = response.json::<Option<CardList>>();
+                match results {
+                    Ok(r) => { r }
+                    Err(e) => { std::process::exit(1) }
+                }
+            }
+            Err(e) => {
                 std::process::exit(1);
             }
-            res = results.json().unwrap();
         }
-        res
     }
 }
 
