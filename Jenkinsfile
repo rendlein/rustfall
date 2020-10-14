@@ -1,5 +1,8 @@
 pipeline {
-  agent any
+  agent {
+    table 'rust'
+  }
+
   stages {
     stage('Build') {
       steps {
