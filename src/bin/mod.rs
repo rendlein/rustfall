@@ -19,7 +19,7 @@ fn main() {
         if let Some(text) = text {
             for value in text {
                 string.push_str(value);
-                string.push_str(" ");
+                string.push(' ');
             }
 
             let query = Query::new(string);

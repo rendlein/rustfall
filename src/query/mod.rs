@@ -7,7 +7,7 @@ pub struct Query {
 }
 
 impl Query {
-    pub fn new(mut req: String) -> Self {
+    pub fn new(req: String) -> Self {
         let mut search = "https://api.scryfall.com/cards/search?q=".to_string();
 
         search.push_str(format(&req).as_str());
@@ -38,4 +38,15 @@ fn format(str: &str) -> String {
     str.replace(":", "%3A")
         //.replace("=", "%3D")
         .replace(" ", "+")
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::query::Query;
+
+    #[test]
+    fn build_api_query() {
+        let q = Query::new(String::from("f:pauper t:creature id:gb"));
+        assert_eq!("https://api.scryfall.com/cards/search?q=f%3Apauper+t%3Acreature+id%3Agb", q.string);
+    }
 }
