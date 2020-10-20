@@ -1,5 +1,5 @@
 use crate::card::CardList;
-use reqwest::blocking as reqwest;
+use ::reqwest::blocking as reqwest;
 
 #[derive(Debug)]
 pub struct Query {
