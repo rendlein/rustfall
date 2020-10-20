@@ -9,9 +9,7 @@ pub struct Query {
 impl Query {
     pub fn new(mut req: String) -> Self {
         let mut search = "https://api.scryfall.com/cards/search?q=".to_string();
-        if req.contains("scryfall.com") {
-            req = req.replace("https://api.scryfall.com/cards/search", "");
-        }
+
         search.push_str(format(&req).as_str());
         Query { string: search }
     }
@@ -23,7 +21,9 @@ impl Query {
             Ok(response) => {
                 let results = response.json::<Option<CardList>>();
                 match results {
-                    Ok(r) => r,
+                    Ok(r) =>  {
+                        r
+                    },
                     Err(_e) => std::process::exit(1),
                 }
             }

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e56462de-ebfb-4dcf-a8f0-8efd0e58ecad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bin/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/card/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/card/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/query/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/mod.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +33,19 @@
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Cargo.Run">
+  <component name="RunManager" selected="Cargo.1 drop Pauper">
+    <configuration name="1 drop Pauper" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="run -- cmc=1 f:pauper t:creature " />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Clippy" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="clippy" />
@@ -44,21 +58,9 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
-      <option name="channel" value="DEFAULT" />
-      <option name="command" value="run -- liliana" />
-      <option name="allFeatures" value="false" />
-      <option name="emulateTerminal" value="false" />
-      <option name="backtrace" value="SHORT" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <envs />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Cargo.Clippy" />
-      <item itemvalue="Cargo.Run" />
+      <item itemvalue="Cargo.1 drop Pauper" />
     </list>
   </component>
   <component name="RustProjectSettings">
@@ -77,30 +79,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="417" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603234868899">
+    <state x="960" y="197" width="958" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603236368670">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="417" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1598797516528" />
-    <state x="417" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1603234868899" />
-    <state width="1876" height="298" key="GridCell.Tab.0.bottom" timestamp="1603234847041">
+    <state x="960" y="197" width="958" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1603236368670" />
+    <state width="916" height="298" key="GridCell.Tab.0.bottom" timestamp="1603236581235">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1876" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1598797589318" />
-    <state width="1876" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1603234847041" />
-    <state width="1876" height="298" key="GridCell.Tab.0.center" timestamp="1603234847040">
+    <state width="916" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1603236581235" />
+    <state width="916" height="298" key="GridCell.Tab.0.center" timestamp="1603236581235">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1876" height="298" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1598797589318" />
-    <state width="1876" height="298" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1603234847040" />
-    <state width="1876" height="298" key="GridCell.Tab.0.left" timestamp="1603234847040">
+    <state width="916" height="298" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1603236581235" />
+    <state width="916" height="298" key="GridCell.Tab.0.left" timestamp="1603236581234">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1876" height="298" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1598797589318" />
-    <state width="1876" height="298" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1603234847040" />
-    <state width="1876" height="298" key="GridCell.Tab.0.right" timestamp="1603234847041">
+    <state width="916" height="298" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1603236581234" />
+    <state width="916" height="298" key="GridCell.Tab.0.right" timestamp="1603236581235">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1876" height="298" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1366.768@0.0.1920.1080" timestamp="1598797589318" />
-    <state width="1876" height="298" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1603234847041" />
+    <state width="916" height="298" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1603236581235" />
   </component>
 </project>
